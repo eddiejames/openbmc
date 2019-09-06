@@ -1,0 +1,50 @@
+From e6611716dd19210bc4ba1fc3139f4ff3096c392e Mon Sep 17 00:00:00 2001
+From: Eddie James <eajames@linux.ibm.com>
+Date: Fri, 6 Sep 2019 10:04:59 -0500
+Subject: [PATCH] arch: ARM: Aspeed: AST2600: Add GPIO controller
+
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+---
+ arch/arm/boot/dts/aspeed-g6.dtsi | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/arch/arm/boot/dts/aspeed-g6.dtsi b/arch/arm/boot/dts/aspeed-g6.dtsi
+index 12569e5..dd48710 100644
+--- a/arch/arm/boot/dts/aspeed-g6.dtsi
++++ b/arch/arm/boot/dts/aspeed-g6.dtsi
+@@ -168,6 +168,32 @@
+ 				quality = <100>;
+ 			};
+ 
++			gpio: gpio@1e780000 {
++				#gpio-cells = <2>;
++				gpio-controller;
++				compatible = "aspeed,ast2600-gpio";
++				reg = <0x1e780000 0x200>;
++				interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
++				ngpios = <208>;
++				gpio-ranges = <&pinctrl 0 0 208>;
++				clocks = <&syscon ASPEED_CLK_APB1>;
++				interrupt-controller;
++				#interrupt-cells = <2>;
++			};
++
++			gpio18v: gpio@1e780800 {
++				#gpio-cells = <2>;
++				gpio-controller;
++				compatible = "aspeed,ast2600-gpio";
++				reg = <0x1e780800 0x200>;
++				interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>;
++				ngpios = <36>;
++				gpio-ranges = <&pinctrl 0 208 36>;
++				clocks = <&syscon ASPEED_CLK_APB1>;
++				interrupt-controller;
++				#interrupt-cells = <2>;
++			};
++
+ 			rtc: rtc@1e781000 {
+ 				compatible = "aspeed,ast2600-rtc";
+ 				reg = <0x1e781000 0x18>;
+-- 
+1.8.3.1
+
