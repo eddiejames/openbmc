@@ -5,5 +5,6 @@ SRC_URI_append_witherspoon-128 = " file://0001-ARM-dts-Aspeed-Witherspoon-128-Up
 SRC_URI_append_rainier = " \
     file://0001-arm-dts-add-a-g5-flash-ip.patch \
     file://0002-arm-dts-aspeed-add-Rainier-system.patch \
+    file://0001-rainer-patch-i2c-devices-into-dts.patch \
     file://rainier.cfg \
     "

@@ -15,6 +15,8 @@ SRC_URI += " file://0002-gpio-aspeed-Fix-incorrect-number-of-banks.patch"
 SRC_URI += " file://0003-gpios-Use-ngpio-property-from-device-tree-if-availab.patch"
 SRC_URI += " file://0004-gpio-Add-in-ast2600-details-to-Aspeed-driver.patch"
 SRC_URI += " file://0001-arch-ARM-Aspeed-AST2600-Add-GPIO-controller.patch"
+SRC_URI += " file://linux-dev-5.2-1-2-ARM-dts-Aspeed-Add-I2C-busses-to-AST2600-and-Tacoma.patch"
+SRC_URI += " file://linux-dev-5.2-2-2-i2c-Aspeed-Add-AST2600-compatible.patch"
 
 LINUX_VERSION_EXTENSION ?= "-${SRCREV}"
 
