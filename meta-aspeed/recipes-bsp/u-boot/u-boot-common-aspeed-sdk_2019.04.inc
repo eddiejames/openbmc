@@ -13,6 +13,9 @@ SRCREV = "9b5fc98374593c49133b709f71119222ecfff3eb"
 UBRANCH = "aspeed-dev-v2019.04"
 SRC_URI = "git://github.com/AspeedTech-BMC/u-boot;branch=${UBRANCH};protocol=https"
 
+SRC_URI += " file://0001-ram-aspeed-Add-DDR4-option-for-400Mbps.patch"
+SRC_URI += " file://0002-configs-evb-ast2600-Run-DDR4-at-400Mbps.patch"
+
 S = "${WORKDIR}/git"
 
 PV = "v2019.04+git${SRCPV}"

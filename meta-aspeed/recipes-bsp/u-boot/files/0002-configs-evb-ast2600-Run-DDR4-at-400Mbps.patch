@@ -1,0 +1,22 @@
+From 11b83cf87a949cd4127aa96d9867ac78b4948774 Mon Sep 17 00:00:00 2001
+From: Andrew Jeffery <andrew@aj.id.au>
+Date: Fri, 30 Aug 2019 17:24:00 +0930
+Subject: [PATCH 2/3] configs: evb-ast2600: Run DDR4 at 400Mbps
+
+Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+---
+ configs/evb-ast2600_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/evb-ast2600_defconfig b/configs/evb-ast2600_defconfig
+index 517d59a..9600ed4 100644
+--- a/configs/evb-ast2600_defconfig
++++ b/configs/evb-ast2600_defconfig
+@@ -72,3 +72,4 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_SYSRESET=y
+ CONFIG_WDT=y
++CONFIG_ASPEED_DDR4_400=y
+-- 
+1.8.3.1
+
