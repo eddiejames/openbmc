@@ -1,0 +1,109 @@
+From 3963b54e3b9d1186c0e8585723ece615df348fa7 Mon Sep 17 00:00:00 2001
+From: Brad Bishop <bradleyb@fuzziesquirrel.com>
+Date: Mon, 26 Aug 2019 06:56:43 -0400
+Subject: [PATCH 4/4] ARM: dts: aspeed-g6: add a g5 spi ip block
+
+This is a hack to enable a frankenstein simulation model of the AST2600
+with the spi controller model replaced with a G5 model.
+
+Signed-off-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+---
+ arch/arm/boot/dts/aspeed-g6.dtsi              |  2 +
+ .../dts/aspeed-rainier-bu-hacks-g5-spi.dtsi   | 72 +++++++++++++++++++
+ 2 files changed, 74 insertions(+)
+ create mode 100644 arch/arm/boot/dts/aspeed-rainier-bu-hacks-g5-spi.dtsi
+
+diff --git a/arch/arm/boot/dts/aspeed-g6.dtsi b/arch/arm/boot/dts/aspeed-g6.dtsi
+index b4991cbe1f36..b2d8d0bd67d7 100644
+--- a/arch/arm/boot/dts/aspeed-g6.dtsi
++++ b/arch/arm/boot/dts/aspeed-g6.dtsi
+@@ -68,6 +68,8 @@
+ 		device_type = "soc";
+ 		ranges;
+ 
++#include "aspeed-rainier-bu-hacks-g5-spi.dtsi"
++
+ 		gic: interrupt-controller@40461000 {
+ 			compatible = "arm,cortex-a7-gic";
+ 			interrupts = <GIC_PPI 9 (GIC_CPU_MASK_SIMPLE(2) | IRQ_TYPE_LEVEL_HIGH)>;
+diff --git a/arch/arm/boot/dts/aspeed-rainier-bu-hacks-g5-spi.dtsi b/arch/arm/boot/dts/aspeed-rainier-bu-hacks-g5-spi.dtsi
+new file mode 100644
+index 000000000000..88a85eaf8fb0
+--- /dev/null
++++ b/arch/arm/boot/dts/aspeed-rainier-bu-hacks-g5-spi.dtsi
+@@ -0,0 +1,72 @@
++// SPDX-License-Identifier: GPL-2.0+
++// Copyright 2019 IBM Corp.
++
++fmc: spi@1e620000 {
++	reg = < 0x1e620000 0xc4
++		0x20000000 0x10000000 >;
++	#address-cells = <1>;
++	#size-cells = <0>;
++	compatible = "aspeed,ast2500-fmc";
++	clocks = <&syscon ASPEED_CLK_AHB>;
++	status = "okay";
++	interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
++
++	flash@0 {
++		reg = < 0 >;
++		compatible = "jedec,spi-nor";
++		status = "okay";
++		label = "bmc";
++		m25p,fast-read;
++		spi-max-frequency = <50000000>;
++
++		partitions {
++			compatible = "fixed-partitions";
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			u-boot@0 {
++				reg = <0x0 0x60000>;
++				label = "u-boot";
++			};
++
++			u-boot-env@60000 {
++				reg = <0x60000 0x20000>;
++				label = "u-boot-env";
++			};
++
++			kernel@80000 {
++				reg = <0x80000 0x540000>;
++				label = "kernel";
++			};
++
++			rofs@5c0000 {
++				reg = <0x5c0000 0x1740000>;
++				label = "rofs";
++			};
++
++			rwfs@1c00000 {
++				reg = <0x1c00000 0x400000>;
++				label = "rwfs";
++			};
++		};
++	};
++};
++
++spi1: spi@1e630000 {
++	reg = < 0x1e630000 0xc4
++		0x30000000 0x08000000 >;
++	#address-cells = <1>;
++	#size-cells = <0>;
++	compatible = "aspeed,ast2500-spi";
++	clocks = <&syscon ASPEED_CLK_AHB>;
++	status = "okay";
++
++	flash@0 {
++		reg = < 0 >;
++		compatible = "jedec,spi-nor";
++		status = "okay";
++		m25p,fast-read;
++		label = "pnor";
++		spi-max-frequency = <100000000>;
++	};
++};
+-- 
+2.21.0
+
