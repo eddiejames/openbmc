@@ -13,6 +13,7 @@ SRC_URI_append_aspeed-g6 = " \
     file://0001-ARM-aspeed-g6-lpc-add-compatible-strings.patch \
     file://0002-ARM-dts-aspeed-g6-Add-lpc-devices.patch \
     file://0003-ARM-dts-aspeed-add-Rainier-system.patch \
+    file://0001-ARM-dts-aspeed-rainier-add-lpc_ctrl.patch \
     "
 
 LINUX_VERSION_EXTENSION ?= "-${SRCREV}"
