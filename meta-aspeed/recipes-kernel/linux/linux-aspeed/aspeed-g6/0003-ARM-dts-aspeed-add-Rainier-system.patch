@@ -1,19 +1,19 @@
-From b63d85a97b5367b1cd725fc95b6608b3dae456a4 Mon Sep 17 00:00:00 2001
+From 2f045eddab45ff2de4e7198b802d1f4c4039df7b Mon Sep 17 00:00:00 2001
 From: Brad Bishop <bradleyb@fuzziesquirrel.com>
 Date: Mon, 26 Aug 2019 07:03:57 -0400
-Subject: [PATCH 3/4] ARM: dts: aspeed: add Rainier system
+Subject: [PATCH 3/3] ARM: dts: aspeed: add Rainier system
 
 Rainier is a new Power system with an AST2600.
 
 Signed-off-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
 ---
  arch/arm/boot/dts/Makefile                   |   3 +-
- arch/arm/boot/dts/aspeed-bmc-opp-rainier.dts | 446 +++++++++++++++++++
- 2 files changed, 448 insertions(+), 1 deletion(-)
+ arch/arm/boot/dts/aspeed-bmc-opp-rainier.dts | 451 +++++++++++++++++++++++++++
+ 2 files changed, 453 insertions(+), 1 deletion(-)
  create mode 100644 arch/arm/boot/dts/aspeed-bmc-opp-rainier.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 5af075c2f819..2f81a4be50a8 100644
+index 5af075c..2f81a4b 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
 @@ -1293,4 +1293,5 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
@@ -25,10 +25,10 @@ index 5af075c2f819..2f81a4be50a8 100644
 +	aspeed-bmc-opp-rainier.dtb
 diff --git a/arch/arm/boot/dts/aspeed-bmc-opp-rainier.dts b/arch/arm/boot/dts/aspeed-bmc-opp-rainier.dts
 new file mode 100644
-index 000000000000..485c8732eec1
+index 0000000..e4347a8
 --- /dev/null
 +++ b/arch/arm/boot/dts/aspeed-bmc-opp-rainier.dts
-@@ -0,0 +1,446 @@
+@@ -0,0 +1,451 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +// Copyright 2019 IBM Corp.
 +/dts-v1/;
@@ -325,6 +325,11 @@ index 000000000000..485c8732eec1
 +		reg = <0x11>;
 +	};
 +
++	rtc@32 {
++		compatible = "epson,rx8900";
++		reg = <0x32>;
++	};
++
 +	tmp275@48 {
 +		compatible = "ti,tmp275";
 +		reg = <0x48>;
@@ -476,5 +481,5 @@ index 000000000000..485c8732eec1
 +	status = "okay";
 +};
 -- 
-2.21.0
+1.8.3.1
 
